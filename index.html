@@ -1,69 +1,291 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>USDT in a staking pool (USDT.S) — BNB Smart Chain</title>
-  <meta name="description" content="Official project information and contact details." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0B1220" />
+
+  <title>USDF — TRC20 Token on TRON</title>
+  <meta name="description" content="USDF is a TRC20 token on the TRON network. Official contract info, links, and contact." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="USDF — TRC20 Token on TRON" />
+  <meta property="og:description" content="Official USDF token page: contract, links, and contact." />
+  <meta property="og:image" content="./logo.png" />
+  <meta property="og:type" content="website" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="./logo.png" />
+
   <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; background: #0b0f19; color: #e8eefc; }
-    .wrap { max-width: 920px; margin: 0 auto; padding: 48px 18px; }
-    .card { background: #11182a; border: 1px solid #24304a; border-radius: 16px; padding: 24px; }
-    .row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
-    .logo { width: 56px; height: 56px; border-radius: 14px; background: #0b0f19; display: grid; place-items: center; border: 1px solid #24304a; }
-    .logo img { width: 40px; height: 40px; }
-    h1 { font-size: 26px; margin: 0; }
-    .muted { color: #a9b6d6; margin-top: 6px; }
-    .grid { display: grid; gap: 12px; margin-top: 18px; }
-    .item { background: #0c1220; border: 1px solid #24304a; border-radius: 12px; padding: 12px 14px; }
-    .label { color: #a9b6d6; font-size: 12px; margin-bottom: 6px; }
-    .value { font-size: 14px; word-break: break-word; }
-    a { color: #7db2ff; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .footer { margin-top: 18px; color: #a9b6d6; font-size: 12px; }
-    code { background: #0b0f19; padding: 2px 6px; border-radius: 8px; border: 1px solid #24304a; }
+    :root{
+      --bg1:#071022;
+      --bg2:#0B1220;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.09);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
+      --line: rgba(255,255,255,.12);
+      --accent:#22c55e;
+      --accent2:#10b981;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue";
+      color:var(--text);
+      background:
+        radial-gradient(1100px 700px at 20% 10%, rgba(16,185,129,.28), transparent 55%),
+        radial-gradient(900px 600px at 85% 25%, rgba(34,197,94,.22), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:1040px; margin:0 auto; padding:28px 18px 64px}
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:10px 0 26px;
+    }
+    .brand{display:flex; align-items:center; gap:12px}
+    .logo{
+      width:46px; height:46px; border-radius:14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+    }
+    .title{display:flex; flex-direction:column; line-height:1.12}
+    .title b{font-size:16px}
+    .title span{font-size:13px; color:var(--muted)}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      border-radius:999px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .dot{width:8px;height:8px;border-radius:99px;background:var(--accent)}
+    .hero{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+    }
+    .card{
+      background: var(--card);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .inner{padding:22px}
+    h1{margin:0 0 10px; font-size:34px; letter-spacing:.2px}
+    p{margin:0; color:var(--muted); line-height:1.6}
+    .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:12px 14px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      font-size:14px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.22)}
+    .btn:active{transform: translateY(1px)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(34,197,94,.95), rgba(16,185,129,.88));
+      border-color: rgba(16,185,129,.65);
+      color:#061015;
+      font-weight:650;
+    }
+    .btn.primary:hover{filter: brightness(1.03)}
+    .grid{
+      display:grid; grid-template-columns: 1fr 1fr;
+      gap:10px; margin-top:14px;
+    }
+    @media (max-width: 520px){ .grid{grid-template-columns:1fr} }
+    .kv{
+      padding:12px 12px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+    }
+    .kv small{display:block; color:var(--muted); font-size:12px; margin-bottom:4px}
+    .kv b{display:block; font-size:14px; overflow-wrap:anywhere}
+    .muted{color:var(--muted)}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+    .section{margin-top:18px}
+    .hr{height:1px; background:var(--line); margin:18px 0}
+    .right .inner{padding:18px 18px 16px}
+    .list{display:flex; flex-direction:column; gap:10px}
+    .item{
+      display:flex; justify-content:space-between; gap:12px;
+      padding:12px 12px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+    }
+    .item span{color:var(--muted); font-size:13px}
+    .item b{font-size:13px}
+    footer{margin-top:18px; color:var(--muted); font-size:12px; line-height:1.5}
+    .toast{
+      position:fixed; left:50%; bottom:18px; transform:translateX(-50%);
+      background: rgba(0,0,0,.62);
+      border:1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.92);
+      padding:10px 12px;
+      border-radius: 14px;
+      font-size:13px;
+      box-shadow: 0 16px 60px rgba(0,0,0,.5);
+      display:none;
+    }
   </style>
 </head>
+
 <body>
   <div class="wrap">
-    <div class="card">
-      <div class="row">
-        <div class="logo">
-          <img src="./token.svg" alt="Token logo" />
+    <header>
+      <div class="brand">
+        <img class="logo" src="./logo.png" alt="USDF logo" />
+        <div class="title">
+          <b>USDF</b>
+          <span>TRC-20 Token on TRON</span>
         </div>
-        <div>
-          <h1>USDT in a staking pool <span class="muted">(USDT.S)</span></h1>
-          <div class="muted">BNB Smart Chain (BEP-20)</div>
+      </div>
+      <div class="pill"><span class="dot"></span> Official token page</div>
+    </header>
+
+    <section class="hero">
+      <div class="card">
+        <div class="inner">
+          <h1>Independent Fork Coin <span class="muted">(USDF)</span></h1>
+          <p>
+            USDF is a TRC-20 token deployed on the TRON network. This page contains the official
+            contract address, basic token details, and project contact information.
+          </p>
+
+          <div class="actions">
+            <a class="btn primary" href="https://tronscan.org/#/contract/TJKfmxCEFNyXDSpMUuZtANuiSsadLjJFad" target="_blank" rel="noreferrer">
+              Open on TronScan
+            </a>
+            <button class="btn" id="copyBtn" type="button" title="Copy contract address">
+              Copy contract
+            </button>
+            <a class="btn" href="mailto:jerom6156@gmail.com">
+              Email support
+            </a>
+          </div>
+
+          <div class="grid section">
+            <div class="kv">
+              <small>Contract (TRON)</small>
+              <b class="mono" id="addr">TJKfmxCEFNyXDSpMUuZtANuiSsadLjJFad</b>
+            </div>
+            <div class="kv">
+              <small>Network</small>
+              <b>TRON (Mainnet)</b>
+            </div>
+            <div class="kv">
+              <small>Token standard</small>
+              <b>TRC-20</b>
+            </div>
+            <div class="kv">
+              <small>Decimals</small>
+              <b id="decimals">6</b>
+            </div>
+            <div class="kv">
+              <small>Total supply</small>
+              <b id="supply">3,000,000</b>
+            </div>
+            <div class="kv">
+              <small>Deployer / Owner</small>
+              <b class="mono">TE9Zs7YbhYHgXqyFbQnKm6SLFfsaMxbtRD</b>
+            </div>
+          </div>
+
+          <div class="hr"></div>
+
+          <p class="muted">
+            Disclaimer: USDF is not affiliated with USDT, TRON Foundation, or any third-party brands.
+            Always verify the contract address before interacting with any token.
+          </p>
         </div>
       </div>
 
-      <div class="grid">
-        <div class="item">
-          <div class="label">Official Contact Email</div>
-          <div class="value">
-            <a href="mailto:agentboy1234567890@gmail.com">agentboy1234567890@gmail.com</a>
+      <div class="card right">
+        <div class="inner">
+          <div class="list">
+            <div class="item">
+              <span>Website</span>
+              <b id="siteUrl" class="mono">GitHub Pages</b>
+            </div>
+            <div class="item">
+              <span>Contact</span>
+              <b><a href="mailto:jerom6156@gmail.com">jerom6156@gmail.com</a></b>
+            </div>
+            <div class="item">
+              <span>Logo (direct)</span>
+              <b><a href="./logo.png" target="_blank" rel="noreferrer">logo.png</a></b>
+            </div>
           </div>
-        </div>
 
-        <div class="item">
-          <div class="label">Project Description</div>
-          <div class="value">
-            BEP-20 token on BNB Smart Chain. This page provides official project information and contact details for the token.
-          </div>
-        </div>
+          <div class="hr"></div>
 
-        <div class="item">
-          <div class="label">Token Contract Address</div>
-          <div class="value">
-            <code>0xb66EE86f1466F04BA939C7c76c18660d7aC19F78</code>
-          </div>
+          <p class="muted">
+            Add to wallet as custom token:
+            <br/>Network: TRON • Type: TRC-20
+            <br/>Contract: <span class="mono">TJKfmxCEFNyXDSpMUuZtANuiSsadLjJFad</span>
+          </p>
+
+          <footer>
+            © <span id="year"></span> USDF. All rights reserved.
+          </footer>
         </div>
       </div>
-
-      <div class="footer">
-        Official project page hosted via GitHub Pages.
-      </div>
-    </div>
+    </section>
   </div>
+
+  <div class="toast" id="toast">Copied</div>
+
+  <script>
+    const addrEl = document.getElementById("addr");
+    const copyBtn = document.getElementById("copyBtn");
+    const toast = document.getElementById("toast");
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function showToast(text){
+      toast.textContent = text;
+      toast.style.display = "block";
+      clearTimeout(window.__t);
+      window.__t = setTimeout(()=> toast.style.display="none", 1400);
+    }
+
+    copyBtn.addEventListener("click", async () => {
+      const text = addrEl.textContent.trim();
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast("Contract copied ✅");
+      } catch (e) {
+        // fallback
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        showToast("Contract copied ✅");
+      }
+    });
+  </script>
 </body>
 </html>
